@@ -32,17 +32,21 @@ ev = Fql.execute("SELECT name, eid, start_time, end_time, host, description, cre
                   WHERE eid IN 
                       (SELECT eid from event_member WHERE uid IN (#{uids}))
                   AND privacy='open'", options)
-                  
+            
+puts "found #{ev.count} events before filtering"    
 # evaluate if events should be included in the list
 ev.each do |e|
   match = false
   
   if e["location"]
+    #puts e["venue"]
+    
     location = e["location"].downcase.gsub(/\s/, "") 
     if location_matches.any? { |w| location =~ /#{w}/ }
       match = true
     end
   end
+  
   
   events[e["eid"]] = e if match
   
