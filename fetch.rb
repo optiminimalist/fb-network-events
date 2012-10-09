@@ -34,6 +34,7 @@ ev = Fql.execute("SELECT name, eid, start_time, end_time, host, description, cre
                   AND privacy='open'", options)
             
 puts "found #{ev.count} events before filtering"    
+
 # evaluate if events should be included in the list
 ev.each do |e|
   match = false
@@ -52,4 +53,4 @@ ev.each do |e|
   
 end
 
-puts "found #{events.count} events"
+puts events.first
