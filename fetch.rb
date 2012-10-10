@@ -49,8 +49,9 @@ ev.each do |e|
   end
   
   
-  events[e["eid"]] = e if match
-  
+  if match
+    puts e["eid"]
+    events[e["eid"]] = e if match
+    
+  end
 end
-
-puts events.first
